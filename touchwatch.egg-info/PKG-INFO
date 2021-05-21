@@ -2,13 +2,13 @@ Metadata-Version: 1.2
 Name: touchwatch
 Version: 0.1
 Summary: A Django app to watch for changes and touch a file.
-Home-page: https://www.thisislevelup.com/
+Home-page: https://github.com/abrown1982/touchwatch
 Author: Allan Brown
 Author-email: hello@thisislevelup.com
-License: MIT
-Description: =====
+License: MIT License
+Description: ==========
         Touchwatch
-        =====
+        ==========
         
         Touchwatch is a small Django app to watch a directory for changes
         and if any found, touch a file (to trigger a server restart).
@@ -41,9 +41,10 @@ Description: =====
         
             TOUCHWATCH_FOLDER = APP_DIR
         
-        =====
+        ============
         How it works
-        =====
+        ============
+        
         From the commandline run the management command 'touchwatch':
         
             python manage.py touchwatch
@@ -57,7 +58,7 @@ Classifier: Environment :: Web Environment
 Classifier: Framework :: Django
 Classifier: Framework :: Django :: 3.1
 Classifier: Intended Audience :: Developers
-Classifier: License :: MIT
+Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Classifier: Programming Language :: Python
 Classifier: Programming Language :: Python :: 3

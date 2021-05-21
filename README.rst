@@ -1,6 +1,6 @@
-=====
+==========
 Touchwatch
-=====
+==========
 
 Touchwatch is a small Django app to watch a directory for changes
 and if any found, touch a file (to trigger a server restart).
@@ -33,9 +33,10 @@ Quick start
 
     TOUCHWATCH_FOLDER = APP_DIR
 
-=====
+============
 How it works
-=====
+============
+
 From the commandline run the management command 'touchwatch':
 
     python manage.py touchwatch
