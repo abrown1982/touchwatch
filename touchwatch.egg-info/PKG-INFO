@@ -1,0 +1,70 @@
+Metadata-Version: 1.2
+Name: touchwatch
+Version: 0.1
+Summary: A Django app to watch for changes and touch a file.
+Home-page: https://www.thisislevelup.com/
+Author: Allan Brown
+Author-email: hello@thisislevelup.com
+License: MIT
+Description: =====
+        Touchwatch
+        =====
+        
+        Touchwatch is a small Django app to watch a directory for changes
+        and if any found, touch a file (to trigger a server restart).
+        
+        Quick start
+        -----------
+        
+        1. Add "touchwatch" to your INSTALLED_APPS setting like this::
+        
+            INSTALLED_APPS = [
+                ...
+                'touchwatch',
+            ]
+        
+        2. Include the polls URLconf in your project urls.py like this::
+        
+            from touchwatch.views import wsgitime
+            if settings.DEBUG:
+                urlpatterns += path('wt/', wsgitime, name='wsgitime'),
+        
+        3. Include the template at the bottom of your base.html file
+        
+            {% include "touchwatch/js.html" %}
+        
+        4.. Set the path of the file you want to touch in your settings file
+        
+            TOUCHWATCH_PATH = "%s/uwsgi.ini" % APP_DIR
+        
+        5.. Set the path of the folder you want to watch in your settings file
+        
+            TOUCHWATCH_FOLDER = APP_DIR
+        
+        =====
+        How it works
+        =====
+        From the commandline run the management command 'touchwatch':
+        
+            python manage.py touchwatch
+        
+        This will then sit and watch for changes to the file defined in TOUCHWATCH_FOLDER, when changes are seen
+        then the file defined in TOUCHWATCH_PATH will be touched.  A small piece of JS runs on all pages on the
+        browser which looks for a change to the touched time of the defined file.  When the time changes,
+        the JS flashes the background colour and refreshes the page.
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 3.1
+Classifier: Intended Audience :: Developers
+Classifier: License :: MIT
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Requires-Python: >=3.6

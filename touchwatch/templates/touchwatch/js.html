@@ -1,0 +1,28 @@
+{% if wt %}
+<!-- debug code for auto page reload -->
+<style>
+    @keyframes fadein { from { background-color: {{ wtcolour }}; } to { opacity: auto; } }
+    .touchflash { animation: fadein 0.5s;}
+</style>
+<script>
+    var wt = {{ wt }};
+    function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+    function reload() { console.warn("Reloading!"); document.body.classList.add("touchflash"); location.reload();  }
+    async function subscribe() {
+        await sleep({{ wtdelay }});                      // Call max every second.
+        let response = await fetch("/wt/");
+        if (response.status == 502) {           // Status 502 is a connection timeout error, may happen when the connection was pending for too long, and the remote server or a proxy closed it let's reconnect
+            await subscribe();
+        } else if (response.status != 200) {    // An error - let's show it
+            console.warn(response.statusText);  // Reconnect in one second
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            await subscribe();
+        } else {                                // Get and show the message
+            let message = await response.json();
+            if (message.wt && message.wt != wt) { reload(); }
+            await subscribe();                  // Call subscribe() again to get the next message
+        }
+    }
+    subscribe();
+</script>
+{% endif %}
