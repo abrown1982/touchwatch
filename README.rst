@@ -25,9 +25,11 @@ Quick start
 
     {% include "touchwatch/js.html" %}
 
-4.. Set the path of the file you want to touch in your settings file
+4.. Set the path of the file you want to touch in your settings file OR set the command you want to be run
 
     TOUCHWATCH_PATH = "%s/uwsgi.ini" % APP_DIR
+
+    TOUCHWATCH_COMMAND = "ps -ef | grep 'gunicorn' | grep -v grep | awk '{print $2}' | xargs -r kill -HUP 2> /dev/null"
 
 5.. Set the path of the folder you want to watch in your settings file
 

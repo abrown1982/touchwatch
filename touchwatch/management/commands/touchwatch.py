@@ -20,7 +20,11 @@ class Command(BaseCommand):
             self.last_restarted = self.current_milli_time()
         elif self.last_restarted+self.restart_delay < self.current_milli_time():
             self.last_restarted = self.current_milli_time()
-            Path(settings.TOUCHWATCH_PATH).touch()
+            if (settings.TOUCHWATCH_PATH):
+                Path(settings.TOUCHWATCH_PATH).touch()
+            if (settings.TOUCHWATCH_COMMAND):
+                import os
+                os.system(settings.TOUCHWATCH_COMMAND)
             self.stdout.write(message)
     
     def on_created(self, event):
@@ -42,8 +46,8 @@ class Command(BaseCommand):
         if settings.TOUCHWATCH_FOLDER == None:
             self.stdout.write(f"SETTINGS ERROR: Please set your 'TOUCHWATCH_FOLDER' setting.")
             exit;
-        if settings.TOUCHWATCH_PATH == None:
-            self.stdout.write(f"SETTINGS ERROR: Please set your 'TOUCHWATCH_PATH' setting.")
+        if settings.TOUCHWATCH_PATH == None and settings.TOUCHWATCH_COMMAND == None:
+            self.stdout.write(f"SETTINGS ERROR: Please set your 'TOUCHWATCH_PATH' or 'TOUCHWATCH_COMMAND' setting.")
             exit;
         
         patterns = settings.TOUCHWATCH_PATTERN
